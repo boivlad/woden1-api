@@ -17,12 +17,16 @@ jobs:
         node-version: [12.x]
 
     steps:
+    - name: Checkout private tools
+      uses: actions/checkout@v2
+      with:
+        repository: 482solutions/woden-server
+        token: ${{ secrets.c47622fd7250c63877a93622a6290996bef06793 }}
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: git clone https://github.com/482solutions/woden-server.git
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
